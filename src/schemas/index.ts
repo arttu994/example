@@ -1,3 +1,6 @@
-import configSchema from './config';
+import Joi from 'joi';
+import { postgresSchema } from './config';
 
-export { configSchema };
+const validationSchema = Joi.object().concat(postgresSchema);
+
+export { validationSchema };

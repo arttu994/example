@@ -1,5 +1,3 @@
-import * as Joi from 'joi';
+import postgresSchema from './postgres.schema';
 
-const configSchema = Joi.object();
-
-export default configSchema;
+export { postgresSchema };
