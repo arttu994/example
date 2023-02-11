@@ -26,6 +26,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+    - name: install nest/cli
+      run: npm i -g @nestjs/cli
     - name: build
       run: npm run build
       env:
