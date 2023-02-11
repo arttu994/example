@@ -28,8 +28,8 @@ jobs:
         cache: 'npm'
     - name: install nest/cli
       run: npm i -g @nestjs/cli
+    - name: install dependencies
+      run: npm install
     - name: build
       run: npm run build
-      env:
-        CI: false
     - run: npm test
