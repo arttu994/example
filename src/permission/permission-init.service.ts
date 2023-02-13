@@ -32,10 +32,10 @@ export class PermissionInitService implements OnModuleInit {
       });
 
       await Promise.all([
-        createPermission,
-        readPermission,
-        updatePermission,
-        deletePermission,
+        this.permissionRepository.save(createPermission),
+        this.permissionRepository.save(readPermission),
+        this.permissionRepository.save(updatePermission),
+        this.permissionRepository.save(deletePermission),
       ]);
     }
   }
