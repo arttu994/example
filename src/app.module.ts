@@ -2,7 +2,10 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigType } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { postgresConfig } from './config';
+import { PermissionModule } from './permission/permission.module';
+import { RolesModule } from './roles/roles.module';
 import { validationSchema } from './schemas';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -25,6 +28,9 @@ import { validationSchema } from './schemas';
         logging: true,
       }),
     }),
+    PermissionModule,
+    RolesModule,
+    UsersModule,
   ],
 })
 export class AppModule {}
