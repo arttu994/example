@@ -6,6 +6,7 @@ import { Roles } from '../roles/roles.entity';
 import { RolesModule } from '../roles/roles.module';
 import { UsersInitService } from './users-init.service';
 import { Users } from './users.entity';
+import { UsersService } from './users.service';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { Users } from './users.entity';
     PermissionModule,
     RolesModule,
   ],
-  providers: [UsersInitService],
+  providers: [UsersInitService, UsersService],
+  exports: [UsersService],
 })
 export class UsersModule {}
