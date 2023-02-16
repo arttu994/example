@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { SignupRequestDto } from '../auth/dto/SignupRequest.dto';
+import { SignupRequestDto } from '../auth/dto/signup/SignupRequest.dto';
 import { Users } from './users.entity';
 import * as argon2 from 'argon2';
 import role from '../constants/roles';
