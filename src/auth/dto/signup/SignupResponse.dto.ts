@@ -1,6 +1,6 @@
 import { Exclude } from 'class-transformer';
 import { IsNumber, IsOptional, IsString } from 'class-validator';
-import { Roles } from '../../roles/roles.entity';
+import { Roles } from '../../../roles/roles.entity';
 
 export class SignupResponseDto {
   @IsNumber()
