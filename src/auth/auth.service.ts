@@ -3,10 +3,14 @@ import { UsersService } from '../users/users.service';
 import { SignupRequestDto } from './dto/signup/SignupRequest.dto';
 import * as argon2 from 'argon2';
 import { SigninRequestDto, SigninResponseDto } from './dto/signin';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly jwtService: JwtService,
+  ) {}
 
   async signin() {
     throw new NotImplementedException();

@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigType } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { postgresConfig } from './config';
+import { jwtConfig, postgresConfig } from './config';
 import { PermissionModule } from './permission/permission.module';
 import { RolesModule } from './roles/roles.module';
 import { validationSchema } from './schemas';
@@ -11,7 +11,7 @@ import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      load: [postgresConfig],
+      load: [postgresConfig, jwtConfig],
       validationSchema,
     }),
     TypeOrmModule.forRootAsync({
