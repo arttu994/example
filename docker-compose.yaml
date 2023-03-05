@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=pg
+      - POSTGRES_PASSWORD=pg
+      - POSTGRES_DB=pg
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379
