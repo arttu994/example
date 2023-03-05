@@ -23,13 +23,25 @@ export class RolesInitService implements OnModuleInit {
         throw new Error('Permissions not found');
       }
 
-      const readPermission = permissions.find(
-        (perm) => perm.permission === permission.READ,
+      const userReadPermission = permissions.find(
+        (perm) => perm.permission === permission.USER_READ,
+      );
+
+      const categoryReadPermission = permissions.find(
+        (perm) => perm.permission === permission.CATEGORY_READ,
+      );
+
+      const productReadPermission = permissions.find(
+        (perm) => perm.permission === permission.PRODUCT_READ,
       );
 
       const regularUser = this.rolesRepository.create({
         role: role.USER,
-        permissions: [readPermission],
+        permissions: [
+          userReadPermission,
+          categoryReadPermission,
+          productReadPermission,
+        ],
       });
 
       const adminUser = this.rolesRepository.create({
