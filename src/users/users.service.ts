@@ -16,7 +16,10 @@ export class UsersService {
   ) {}
 
   async findOneByUsername(username: string) {
-    return this.usersRepository.findOne({ where: { username } });
+    return this.usersRepository.findOne({
+      where: { username },
+      relations: ['roles', 'roles.permissions'],
+    });
   }
 
   async save(user: SignupRequestDto) {
