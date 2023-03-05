@@ -2,7 +2,6 @@ import { Injectable, OnModuleInit } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Permission } from './permission.entity';
-import permission from '../constants/permission';
 
 @Injectable()
 export class PermissionInitService implements OnModuleInit {
@@ -11,32 +10,46 @@ export class PermissionInitService implements OnModuleInit {
     private readonly permissionRepository: Repository<Permission>,
   ) {}
 
+  permissionsType = ['USER', 'PRODUCT', 'CATEGORY'];
+
+  getPermissions(name: string) {
+    const create = `${name}_CREATE`;
+    const read = `${name}_READ`;
+    const update = `${name}_UPDATE`;
+    const del = `${name}_DELETE`;
+
+    return { create, read, update, del };
+  }
+
   async onModuleInit() {
     const permissions = await this.permissionRepository.find();
 
     if (permissions.length === 0) {
-      const createPermission = await this.permissionRepository.create({
-        permission: permission.CREATE,
-      });
+      for (const permission of this.permissionsType) {
+        const { create, read, update, del } = this.getPermissions(permission);
+        const createPermission = this.permissionRepository.create({
+          permission: create,
+        });
 
-      const readPermission = await this.permissionRepository.create({
-        permission: permission.READ,
-      });
+        const readPermission = this.permissionRepository.create({
+          permission: read,
+        });
 
-      const updatePermission = await this.permissionRepository.create({
-        permission: permission.UPDATE,
-      });
+        const updatePermission = this.permissionRepository.create({
+          permission: update,
+        });
 
-      const deletePermission = await this.permissionRepository.create({
-        permission: permission.DELETE,
-      });
+        const deletePermission = this.permissionRepository.create({
+          permission: del,
+        });
 
-      await Promise.all([
-        this.permissionRepository.save(createPermission),
-        this.permissionRepository.save(readPermission),
-        this.permissionRepository.save(updatePermission),
-        this.permissionRepository.save(deletePermission),
-      ]);
+        await Promise.all([
+          this.permissionRepository.save(createPermission),
+          this.permissionRepository.save(readPermission),
+          this.permissionRepository.save(updatePermission),
+          this.permissionRepository.save(deletePermission),
+        ]);
+      }
     }
   }
 }
