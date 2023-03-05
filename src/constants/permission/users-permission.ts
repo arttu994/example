@@ -1,10 +1,10 @@
-import { UsersPermission } from 'src/interface';
+import { UsersPermission } from '../../interface';
 
 const UsersPermission: UsersPermission = {
-  CREATE: 'CREATE',
-  READ: 'READ',
-  UPDATE: 'UPDATE',
-  DELETE: 'DELETE',
+  USER_CREATE: 'USER_CREATE',
+  USER_READ: 'USER_READ',
+  USER_UPDATE: 'USER_UPDATE',
+  USER_DELETE: 'USER_DELETE',
 };
 
 export default UsersPermission;
