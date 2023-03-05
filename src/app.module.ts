@@ -7,11 +7,14 @@ import { RolesModule } from './roles/roles.module';
 import { validationSchema } from './schemas';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { CategoryModule } from './category/category.module';
+import { ProductModule } from './product/product.module';
+import redisCacheConfig from './config/cache/redis-cache.config';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      load: [postgresConfig, jwtConfig],
+      load: [postgresConfig, jwtConfig, redisCacheConfig],
       validationSchema,
     }),
     TypeOrmModule.forRootAsync({
@@ -33,6 +36,8 @@ import { AuthModule } from './auth/auth.module';
     RolesModule,
     UsersModule,
     AuthModule,
+    CategoryModule,
+    ProductModule,
   ],
 })
 export class AppModule {}
