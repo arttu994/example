@@ -13,10 +13,10 @@ export class RefreshTokenStrategy extends PassportStrategy(
 ) {
   constructor(
     @Inject(jwtConfig.KEY)
-    private readonly tokenConfig: ConfigType<typeof jwtConfig>,
+    tokenConfig: ConfigType<typeof jwtConfig>,
   ) {
     super({
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      jwtFromRequest: ExtractJwt.fromHeader('refresh_token'),
       ignoreExpiration: false,
       secretOrKey: tokenConfig.RtSecret,
       expiresId: tokenConfig.RtExpires,
@@ -25,11 +25,11 @@ export class RefreshTokenStrategy extends PassportStrategy(
   }
 
   async validate(req: Request, payload: any) {
-    const refresToken = req.headers['refresh_token'];
+    const refreshToken = req.headers['refresh_token'];
 
     return {
       ...payload,
-      refresToken,
+      refreshToken,
     };
   }
 }

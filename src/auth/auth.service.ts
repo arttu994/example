@@ -55,8 +55,6 @@ export class AuthService {
     const user = await this.usersService.findOneByUsername(username);
     const passwordMatches = await argon2.verify(user.password, password);
 
-    Object.entries(user).forEach((e) => console.log(`user is ${e}`));
-
     if (user && passwordMatches) {
       return new SigninResponseDto(user);
     }
@@ -99,11 +97,11 @@ export class AuthService {
     }
   }
 
-  getTokens(payload: UsersDto | UserRefresh, tokenType: string) {
+  async getTokens(payload: UsersDto | UserRefresh, tokenType: string) {
     const [expiresIn, secret] = this.getTokenConfig(tokenType);
     const id = this.getId(payload);
 
-    return this.jwtService.signAsync(
+    const token = await this.jwtService.signAsync(
       {
         sub: id,
         username: payload.username,
@@ -114,5 +112,7 @@ export class AuthService {
         secret,
       },
     );
+
+    return token;
   }
 }
