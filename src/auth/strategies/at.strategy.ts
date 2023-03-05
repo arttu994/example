@@ -14,7 +14,7 @@ export class AccessTokenStrategy extends PassportStrategy(
 ) {
   constructor(
     @Inject(jwtConfig.KEY)
-    private readonly tokenConfig: ConfigType<typeof jwtConfig>,
+    tokenConfig: ConfigType<typeof jwtConfig>,
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),

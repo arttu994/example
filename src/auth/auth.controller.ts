@@ -1,6 +1,7 @@
 import {
   Controller,
   Post,
+  Req,
   UnauthorizedException,
   UseFilters,
   UseGuards,
@@ -16,6 +17,7 @@ import { JwtTokens } from '../interface/jwt.interface';
 import { UserRefresh } from '../interface';
 import { RefreshTokenAuthGuard } from './guards/rt-auth.guard';
 import { TypeOrmExceptionFilter } from '../errors/typeorm-exception.filter';
+import { Request } from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -23,7 +25,11 @@ export class AuthController {
 
   @Post('signin')
   @UseGuards(LocalAuthGuard)
-  async signin(@CurrentUser() user: UsersDto, @UserAgent() userAgent: string) {
+  async signin(
+    @Req() req: Request,
+    @CurrentUser() user: UsersDto,
+    @UserAgent() userAgent: string,
+  ) {
     return this.authService.signin(user, userAgent);
   }
 

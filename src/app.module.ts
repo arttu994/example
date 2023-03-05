@@ -29,7 +29,6 @@ import redisCacheConfig from './config/cache/redis-cache.config';
         database: config.database,
         autoLoadEntities: true,
         synchronize: true,
-        logging: true,
       }),
     }),
     PermissionModule,
